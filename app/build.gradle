@@ -1,0 +1,46 @@
+import java.sql.Time
+
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    testOptions{
+        reportDir="D:\\myown\\app\\build\\reports\\androidTests\\g"+releaseTime()
+    }
+    defaultConfig {
+        applicationId "com.example.huhuhhuhu.gotouiautomator2"
+        minSdkVersion 19
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+def releaseTime(){
+    return new Date().format("yyyy-MM-dd-HH-mm",TimeZone.getTimeZone("UTC"))
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation ('com.android.support.test:runner:1.0.2',{
+        exclude group:'com.android.support',module:'support-annotations'
+    })
+    androidTestImplementation ('com.android.support.test.espresso:espresso-core:3.0.2',{
+        exclude group:'com.android.support',module:'support-annotations'
+    })
+    androidTestImplementation 'com.android.support.test.uiautomator:uiautomator-v18:2.1.2'
+}
+task hello{
+    doLast{
+        println'hello world'
+    }
+}
